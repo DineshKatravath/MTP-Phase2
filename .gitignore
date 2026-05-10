@@ -5,6 +5,7 @@ __pycache__/
 *.blend1
 *.npz
 
+/Users/dinesh/Documents/mtp/01_blender_gesture_modeling/assets/source2/hand_dataset/rotations.json
 02_rf_simulation/sionna_env/
 06_mediapipe_integration/mediaPipe/mediaPipeEnv/
 
