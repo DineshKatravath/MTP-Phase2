@@ -99,25 +99,6 @@ MTP_Hand_RF_Gesture/
 ├── 08_live_hand_tracking/           ← MediaPipe → Blender live receiver
 └── 09_reconstruction/               ← Rebuilding Blender animation from JSON
 ```
-
----
-
-## Current Status (as of Jan 2025)
-
-- [x] Hand rig modeled and rigged in Blender
-- [x] Gesture animation scripts (open, fist, wave, thumbs up/down, random)
-- [x] Per-frame PLY export from Blender
-- [x] PLY cleaning and metric-scale normalization
-- [x] Sionna scene setup (empty, floor-only, floor+walls)
-- [x] CSI/CIR generation per frame
-- [x] RF data saved as .npz
-- [x] Ground-truth keypoints saved as JSON
-- [x] Linked dataset (RF + keypoints) in .npz
-- [x] Spectrogram generation
-- [x] Live hand tracking via MediaPipe → Blender (v3)
-- [ ] MediaPipe → Blender ML bridge (in progress)
-- [ ] Gesture optimization model training (next step)
-
 ---
 
 ## Key Dependencies
