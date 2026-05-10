@@ -1,118 +1,127 @@
-# MTP — Hand Gesture Recognition via RF Sensing
+# RF-Based Hand Gesture Recognition using Blender, MediaPipe, and Sionna
 
-## Project Overview
+**IIT Madras · M.Tech Project (MTP-2) · 2025-26**  
+**Roll No:** CS24M018
 
-This project builds a simulation pipeline that generates mmWave RF signals (CSI/CIR) from animated 3D hand gestures, with the goal of training a model that can **optimally differentiate between gestures** a person performs and **suggest the best personalized gesture vocabulary** for that individual based on RF distinguishability.
+## Overview
 
-The core idea: use Blender to generate realistic hand gesture animations → export per-frame meshes → run mmWave ray-tracing in Sionna → collect CSI/CIR data → pair with ground-truth joint keypoints → train a gesture recognition/optimization model.
+This repository contains a simulation-driven pipeline for contactless hand-gesture recognition using RF sensing. The workflow combines Blender-based hand modeling, MediaPipe landmark capture, NVIDIA Sionna ray-tracing, and downstream machine-learning models for six gesture classes.
 
----
+The project flow is:
 
-## Final Pipeline (End-to-End)
+1. Hand gestures are modeled and animated in Blender.
+2. Per-frame hand meshes are exported as `.ply` sequences.
+3. Sionna simulates RF propagation and produces CSI/CIR outputs.
+4. Classical ML and deep-learning models classify gestures from simulated RF data.
+5. A live demo uses MediaPipe landmarks to drive the Blender hand and trigger the RF pipeline in real time.
 
+The broader research goal is to study how well simulated mmWave RF signals can differentiate hand gestures and support downstream gesture-recognition models.
+
+## Repository Structure
+
+```text
+mtp/
+├── 01_blender_gesture_modeling/
+│   ├── assets/
+│   ├── scripts/
+│   │   ├── animation/
+│   │   ├── core/
+│   │   ├── export/
+│   │   └── reconstruction/
+│   ├── frame_preview.py
+│   ├── frame_preview_v2.py
+│   ├── hand_check.py
+│   └── preprocess_frames.py
+├── 02_rf_simulation/
+│   ├── scripts/
+│   ├── exploration_scripts/
+│   ├── scene_configs/
+│   └── data/
+├── 03_hand_mesh_pipeline/
+├── 04_ml_classification/
+├── 05_live_demo/
+│   └── live_rf_plot_hand/
+├── 06_mediapipe_integration/
+│   ├── blender_receivers/
+│   └── mediaPipe/
+├── 07_visualization/
+│   ├── images/
+│   └── videos/
+└── docs/
 ```
-Blender Hand Rig
-      │
-      ▼
-Gesture Animation (Python scripts in Blender)
-      │
-      ▼
-Per-frame PLY mesh export
-      │
-      ▼
-PLY cleaning + normalization to meters (trimesh)
-      │
-      ▼
-Sionna Ray-Tracing Scene (28 GHz mmWave, floor + walls)
-  TX ──── hand mesh ──── RX
-      │
-      ▼
-CSI (Channel Frequency Response) + CIR (Channel Impulse Response)
-      │
-      ▼
-RF data saved as .npz per frame
-      │
-      ▼
-Ground-truth keypoints saved as JSON from Blender
-      │
-      ▼
-Linked dataset: RF + keypoints → linked_all_frames.npz
-      │
-      ▼
-Spectrograms (slow-time × subcarrier/delay-tap matrix)
-      │
-      ▼
-[Future] Model training for gesture optimization
+
+## Gesture Labels
+
+| Gesture | Label |
+| --- | --- |
+| Palm | 0 |
+| Fist | 1 |
+| Thumbs Up | 2 |
+| Thumbs Down | 3 |
+| OK | 4 |
+| Point | 5 |
+
+## Main Modules
+
+- `01_blender_gesture_modeling/`: Blender assets, animation scripts, export helpers, and reconstruction utilities.
+- `02_rf_simulation/`: Sionna scene setup, RF simulation scripts, experiment variants, and generated RF outputs.
+- `03_hand_mesh_pipeline/`: raw, cleaned, normalized, and wrist-motion mesh-frame datasets.
+- `04_ml_classification/`: feature extraction, baseline ML models, CNN variants, and saved evaluation outputs.
+- `05_live_demo/`: real-time runtime pipeline, RF plotting, and live Sionna workers.
+- `06_mediapipe_integration/`: MediaPipe sender and Blender receiver variants for landmark-driven control.
+- `07_visualization/`: figures and videos used for documentation and presentation.
+- `docs/`: formal project report.
+
+## Technology Stack
+
+| Component | Technology |
+| --- | --- |
+| 3D Modelling and Animation | Blender |
+| Hand Landmark Detection | MediaPipe Hands |
+| RF Simulation | NVIDIA Sionna |
+| Classical ML | scikit-learn, XGBoost |
+| Deep Learning | TensorFlow / Keras |
+| Data Formats | `.ply`, `.npy`, `.npz` |
+| Language | Python 3.10+ |
+
+## RF Configuration
+
+The main RF experiments use a 28 GHz mmWave setup with 400 MHz bandwidth and 256 subcarriers. CSI is generated in Sionna and CIR is obtained through IFFT-based post-processing. The working setup places a single TX and RX around the hand mesh inside controlled room-like scenes with floor and wall reflectors.
+
+## Quick Start
+
+### RF Simulation
+
+```bash
+python 02_rf_simulation/scripts/save_rf_data.py
 ```
 
----
+### Classification
 
-## RF System Parameters
-
-| Parameter | Value |
-|-----------|-------|
-| Carrier Frequency | 28 GHz (mmWave) |
-| Bandwidth | 400 MHz |
-| Subcarriers | 256 |
-| CIR Taps | 256 (= IFFT of CSI) |
-| Delay Resolution (Δτ) | 2.5 ns (= 1/BW) |
-| TX Antennas | 1 (isotropic, vertical polarization) |
-| RX Antennas | 1 (isotropic, vertical polarization) |
-| TX Position | [-0.143, 0.020, -0.020] m |
-| RX Position | [0.167, 0.020, -0.020] m |
-| Propagation Modes | LOS + specular reflection + diffuse reflection + refraction + diffraction |
-| Max Bounce Depth | 6 |
-| Mitsuba Variant | `llvm_ad_mono_polarized` |
-| Hand EM Properties | εᵣ = 17.3, σ = 25.6 S/m (skin at 28 GHz) |
-
----
-
-## Blender Rig Parameters
-
-| Parameter | Value |
-|-----------|-------|
-| Mesh | Low-poly hand (downloaded from Sketchfab) |
-| Total Bones | 20 |
-| Finger Bones | 3 per finger (index, middle, ring, pinky) = 12 |
-| Thumb Bones | 2 |
-| Palm Bones | 5 (one per finger ray) |
-| Wrist Bone | 1 |
-| Finger DOF | Base bone: 2 DOF (curl + spread), Mid/Tip: 1 DOF each |
-| Palm DOF | 1 DOF each |
-| Wrist DOF | 3 DOF |
-
----
-
-## Folder Structure
-
+```bash
+python 04_ml_classification/scripts/ml_model.py
 ```
-MTP_Hand_RF_Gesture/
-├── README.md                        ← This file
-├── 00_project_evolution/            ← How the project evolved, decisions, lessons
-├── 01_hand_modeling/                ← Blender rig setup and bone structure
-├── 02_hand_parameterization/        ← Representing hand as parameter vectors
-├── 03_gesture_animation/            ← Python scripts for animating gestures
-├── 04_dataset_generation/           ← Random pose generation + keypoint export
-├── 05_blender_to_sionna/            ← PLY export, cleaning, normalization
-├── 06_rf_signal_generation/         ← Sionna CSI/CIR computation + spectrograms
-├── 07_keypoint_linking/             ← Linking RF data with ground-truth keypoints
-├── 08_live_hand_tracking/           ← MediaPipe → Blender live receiver
-└── 09_reconstruction/               ← Rebuilding Blender animation from JSON
-```
----
 
-## Key Dependencies
+### Live Demo
 
+```bash
+python 06_mediapipe_integration/sender.py
+python 05_live_demo/live_rf_plot_hand/run_pipeline.py
 ```
-Python 3.10
-sionna-rt == 1.2.1
-mitsuba == 3.7.1
-drjit == 1.2.0
-trimesh
-numpy
-matplotlib
-imageio
-mediapipe
-opencv-python
-bpy (Blender Python API)
-```
+
+## Regenerating Blender Outputs
+
+The repository does not need committed raw `.ply` frame sequences or large Blender-exported motion `.json` files. These are generated locally from the Blender stage when needed.
+
+- Use the animation scripts under `01_blender_gesture_modeling/scripts/animation/` to create or keyframe gesture motion.
+- Use `01_blender_gesture_modeling/scripts/export/export_frames.py` inside Blender to export per-frame hand meshes.
+- Use the reconstruction and animation scripts to regenerate motion JSON outputs from Blender when required by downstream steps.
+- Use the mesh-processing utilities in `03_hand_mesh_pipeline/` before running RF simulation.
+
+## Report
+
+The full project report is available at [docs/CS24M018_MTP2_V2.pdf](/Users/dinesh/Documents/mtp/docs/CS24M018_MTP2_V2.pdf).
+
+## Citation
+
+If you use this work, please cite the M.Tech project report or the metadata in [CITATION.cff](/Users/dinesh/Documents/mtp/CITATION.cff).

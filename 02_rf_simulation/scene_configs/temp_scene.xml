@@ -1,0 +1,11 @@
+<scene version="2.1.0">
+<bsdf type="itu-radio-material" id="mat-hand">
+    <string name="type" value="metal"/>
+    <float name="thickness" value="0.004"/>
+</bsdf>
+<shape type="ply" id="hand">
+    <string name="filename" value="/Users/dinesh/Documents/mtp/hand_models/hand_frames_clean/hand_0000.ply"/>
+    <boolean name="face_normals" value="true"/>
+    <ref id="mat-hand" name="bsdf"/>
+</shape>
+</scene>

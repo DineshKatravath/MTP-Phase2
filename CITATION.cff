@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: RF-Based Hand Gesture Recognition using Blender, MediaPipe and Sionna
+message: "If you use this project, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: CS24M018
+affiliation: Indian Institute of Technology Madras
+abstract: >
+  Simulation-based contactless hand-gesture recognition using Blender hand
+  animation, MediaPipe landmark extraction, NVIDIA Sionna RF simulation, and
+  downstream machine-learning classification.
+keywords:
+  - RF sensing
+  - gesture recognition
+  - Blender
+  - MediaPipe
+  - Sionna
+  - mmWave
+license: Proprietary
+date-released: 2026-01-01
+preferred-citation:
+  type: report
+  authors:
+    - family-names: CS24M018
+  title: RF-Based Hand Gesture Recognition using Blender, MediaPipe and Sionna
+  institution: Indian Institute of Technology Madras
+  year: 2026
+  notes: M.Tech Project Phase 2

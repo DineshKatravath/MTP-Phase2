@@ -1,0 +1,14 @@
+              precision    recall  f1-score   support
+
+        FIST       0.51      0.21      0.29       126
+        OPEN       0.41      0.83      0.55       504
+       PINCH       0.29      0.16      0.20       182
+       POINT       0.17      0.02      0.03        56
+        ROCK       0.39      0.16      0.23       168
+ THUMBS_DOWN       0.33      0.13      0.18       126
+   THUMBS_UP       0.45      0.27      0.33       154
+      V_SIGN       0.00      0.00      0.00        84
+
+    accuracy                           0.40      1400
+   macro avg       0.32      0.22      0.23      1400
+weighted avg       0.36      0.40      0.33      1400
