@@ -5,8 +5,9 @@ import numpy as np
 # =============================
 # CONFIGURATION
 # =============================
+# Change this to your actual paths
 FRAMES_DIR     = "/Users/dinesh/Documents/mtp/hand_models/hand_frames_normalized"
-KEYPOINTS_FILE = "/Users/dinesh/Documents/mtp/hand_models/source 2/hand_motion_dataset_full.json"
+KEYPOINTS_FILE = "/Users/dinesh/Documents/mtp/01_blender_gesture_modeling/assets/source2/hand_motion_dataset_full.json"
 RF_OUTPUT_DIR  = "/Users/dinesh/Documents/mtp/hand_models/rf_output_parallel"  
 LINKED_OUT_DIR = "/Users/dinesh/Documents/mtp/hand_models/linked"      
 

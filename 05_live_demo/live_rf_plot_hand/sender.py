@@ -15,7 +15,7 @@ sock.connect((HOST, PORT))
 # ---------------- MODEL ----------------
 MODEL_PATH = os.environ.get(
     "TASK_FILE",
-    "/Users/dinesh/Documents/mtp/hand_models/mediaPipe/hand_landmarker.task"
+    "/Users/dinesh/Documents/mtp/06_mediapipe_integration/mediaPipe/hand_landmarker.task"
 )
 
 BaseOptions = python.BaseOptions

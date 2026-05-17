@@ -26,6 +26,8 @@ os.makedirs(SAVE_DIR, exist_ok=True)
 # =============================
 # LOAD DATA
 # =============================
+# change this path to your actual linked dataset
+# data = np.load("/Users/dinesh/Documents/mtp/hand_models/linked/linked_all_frames.npz", allow_pickle=True)
 data = np.load("linked/linked_all_frames.npz", allow_pickle=True)
 
 H   = data["H_mat"]

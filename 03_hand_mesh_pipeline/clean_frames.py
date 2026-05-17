@@ -7,8 +7,9 @@ def clean_ply(input_path, output_path):
 
 # Pre-processing all frames once
 import os
-FRAMES_DIR = "/Users/dinesh/Documents/mtp/hand_models/no_movement/hand_frames"
-CLEAN_DIR = "/Users/dinesh/Documents/mtp/hand_models/no_movement/hand_frames_clean"
+# change these paths to your actual directories
+FRAMES_DIR = "/Users/dinesh/Documents/mtp/hand_models/hand_frames"
+CLEAN_DIR = "/Users/dinesh/Documents/mtp/hand_models/hand_frames_clean"
 os.makedirs(CLEAN_DIR, exist_ok=True)
 
 for f in sorted(os.listdir(FRAMES_DIR)):

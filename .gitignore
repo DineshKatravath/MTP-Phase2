@@ -25,3 +25,7 @@ __pycache__/
 05_live_demo/live_rf_plot_hand/hand_frames_live/**/*.ply
 05_live_demo/live_rf_plot_hand/hand_frames_live_clean/**/*.ply
 05_live_demo/live_rf_plot_hand/hand_frames_live_normalized/**/*.ply
+
+/hand_models/hand_frames_live/**/*.ply
+/hand_models/hand_frames_live_clean/**/*.ply
+/hand_models/hand_frames_live_normalized/**/*.ply

@@ -11,7 +11,7 @@ import trimesh
 
 # CONFIGURATION
 
-FRAMES_DIR   = "/Users/dinesh/Documents/mtp/hand_models/with_wrist_movement/hand_frames_normalized"
+FRAMES_DIR   = "/Users/dinesh/Documents/mtp/hand_models/hand_frames_normalized"
 FREQUENCY    = 28e9
 MAX_DEPTH    = 6
 TX_POSITION = np.array([-0.113, -0.006, -0.002])

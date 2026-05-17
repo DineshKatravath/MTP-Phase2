@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 
 # ---------------- CONFIG ----------------
 
-RF_DIR = "/Users/dinesh/Documents/mtp/hand_models/live_rf_plot_hand/rf_output"
+RF_DIR = "/Users/dinesh/Documents/mtp/05_live_demo/live_rf_plot_hand/rf_output"
 
 IDLE_TIMEOUT  = 30.0
 POLL_INTERVAL = 0.1

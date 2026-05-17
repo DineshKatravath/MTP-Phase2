@@ -31,7 +31,7 @@ from sionna.rt import (
 
 # ------------------------------------------------------------------ CONFIG ---
 
-BASE          = "/Users/dinesh/Documents/mtp/hand_models/live_rf_plot_hand"
+BASE          = "/Users/dinesh/Documents/mtp/05_live_demo/live_rf_plot_hand"
 LIVE_DIR      = os.path.join(BASE, "hand_frames_live")
 CLEAN_DIR     = os.path.join(BASE, "hand_frames_live_clean")
 NORM_DIR      = os.path.join(BASE, "hand_frames_live_normalized")

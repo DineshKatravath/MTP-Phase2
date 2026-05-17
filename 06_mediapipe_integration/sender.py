@@ -12,7 +12,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((HOST, PORT))
 
 # ---------------- MODEL ----------------
-MODEL_PATH = "hand_landmarker.task"
+MODEL_PATH = "/Users/dinesh/Documents/mtp/06_mediapipe_integration/mediaPipe/hand_landmarker.task"
 
 BaseOptions = python.BaseOptions
 HandLandmarker = vision.HandLandmarker

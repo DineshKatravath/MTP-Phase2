@@ -2,8 +2,8 @@ import os
 import numpy as np
 import trimesh
 
-FRAMES_DIR = "/Users/dinesh/Documents/mtp/hand_models/no_movement/hand_frames_clean"
-NORM_DIR   = "/Users/dinesh/Documents/mtp/hand_models/no_movement/hand_frames_normalized"
+FRAMES_DIR = "/Users/dinesh/Documents/mtp/hand_models/hand_frames_clean"
+NORM_DIR   = "/Users/dinesh/Documents/mtp/hand_models/hand_frames_normalized"
 os.makedirs(NORM_DIR, exist_ok=True)
 
 frames = sorted(f for f in os.listdir(FRAMES_DIR) if f.endswith(".ply"))

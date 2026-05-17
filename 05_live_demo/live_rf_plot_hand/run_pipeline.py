@@ -4,10 +4,10 @@ import threading
 import time
 import signal
 
-BASE = "/Users/dinesh/Documents/mtp/hand_models/live_rf_plot_hand"
+BASE = "/Users/dinesh/Documents/mtp/05_live_demo/live_rf_plot_hand"
 
-SENDER_PYTHON = "/Users/dinesh/Documents/mtp/hand_models/mediaPipe/mediaPipeEnv/bin/python"
-SIONNA_PYTHON = "/Users/dinesh/Documents/mtp/hand_models/sionna_env/bin/python"
+SENDER_PYTHON = "/Users/dinesh/Documents/mtp/06_mediapipe_integration/mediaPipe/mediaPipeEnv/bin/python"
+SIONNA_PYTHON = "/Users/dinesh/Documents/mtp/02_rf_simulation/sionna_env/bin/python"
 
 SENDER_SCRIPT  = os.path.join(BASE, "sender.py")
 SIONNA_SCRIPT  = os.path.join(BASE, "sionna_live_parallel_rf.py")
@@ -58,7 +58,7 @@ def main():
 
     # Start plotter
     plotter_proc = subprocess.Popen(
-        ["python", PLOTTER_SCRIPT],
+        [SIONNA_PYTHON, PLOTTER_SCRIPT],
         cwd=BASE,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
